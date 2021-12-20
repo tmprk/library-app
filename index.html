@@ -12,7 +12,7 @@
     <div id="container">
         
         <div id="navbar">
-            <div id="title">Library</div>
+            <div id="title"><mark>Library</mark></div>
             <div id="buttons">
                 <button class="btn" id="add">Add Book</button>
                 <button class="btn" id="sort">Sort</button>
@@ -23,14 +23,20 @@
             <table class="book-list">
                 <thead>
                     <tr>
-                        <th>Header</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                        <th>Header</th>
+                        <th>Cover</th>
+                        <th>Title</th>
+                        <th>Pages</th>
+                        <th>Read</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
+                        <td class="fitwidth"><img src="http://placehold.jp/100x160.png" alt="Placeholder"></td>
+                        <td>Cell</td>
+                        <td>Cell</td>
+                        <td>Cell</td>
+                    </tr>
+                    <tr>
                         <td>Cell</td>
                         <td>Cell</td>
                         <td>Cell</td>
@@ -40,12 +46,6 @@
                         <td>Cell</td>
                         <td>Cell</td>
                         <td>Cell</td>
-                        <td>Notes</td>
-                    </tr>
-                    <tr>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                        <td>Cell</td>
                         <td>Cell</td>
                     </tr>
                     <tr>
@@ -55,15 +55,30 @@
                         <td>Cell</td>
                     </tr>
                     <tr>
-                        <td class="fitwidth">Cell</td>
                         <td>Cell</td>
-                        <td class="fitwidth">Cell</td>
+                        <td>Cell</td>
+                        <td>Cell</td>
                         <td>Cell</td>
                     </tr>
                 </tbody>
             </table>
         </div>
+    </div>
 
+    <div class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="header">
+                <h3>Add a book..</h3>
+                <span class="close">&times;</span>
+            </div>
+            <form>
+                <label for="bname">Book Name</label>
+                <input type="text" id="bname" name="bname">
+                <label for="pages">Pages</label>
+                <input type="text" id="pages" name="pages">
+            </form>
+        </div>
     </div>
 </body>
 </html>
