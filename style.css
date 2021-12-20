@@ -36,6 +36,10 @@ body {
 	justify-content: center;
 }
 
+body.modal-open {
+	overflow: hidden;
+}
+
 #container {
 	display: flex;
 	flex-direction: column;
@@ -60,20 +64,27 @@ body {
 	gap: 12px;
 }
 
-.btn {
-	border-radius: 4px;
-	display: inline-block;
+button {
+	border: 0;
 	padding: 10px 8px;
+	border-radius: 4px;
 	font-size: 16px;
+	transition: filter 200ms;
 }
 
-.btn:hover {
+button:hover {
 	filter: brightness(0.8);
 	cursor: pointer;
 }
 
-.btn:active {
+button:active {
 	filter: brightness(0.6);
+}
+
+.btn {
+	/* border-radius: 4px; */
+	display: inline-block;
+	/* padding: 10px 8px; */
 }
 
 #add {
@@ -122,7 +133,7 @@ mark {
 	width: 100%;
 	/* height: 50vh; */
 	background-color: white;
-	border-style: solid;
+	/* border-style: solid; */
 	border-collapse:separate;
 	border-spacing: 0 1em;
 	border-radius: 8px;
@@ -143,9 +154,9 @@ tr:nth-child(even) {
 
 .book-list td,
 .book-list th {
-	/* border-width: 2px; */
-	border-color: white;
-	border-style: solid;
+	/* border-width: px; */
+	/* border-color: white; */
+	/* border-style: solid; */
 	padding: 15px 20px;
 	text-align: left;
 }
@@ -169,8 +180,8 @@ td.wrapText {
 }
 
 /* https://stackoverflow.com/questions/43165984/how-to-create-modal-box-using-html-css-and-jquery */
-.modal {
-	/* display: none; Hidden by default */
+#modal {
+	display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     left: 0;
@@ -181,16 +192,16 @@ td.wrapText {
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 
-	display: flex;
+	/* display: flex; */
 	justify-content: center;
 	align-items: center;
 }
 
 /* Modal Content/Box */
-.modal-content {
+#modal-content {
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
+	gap: 18px;
 
     background-color: #fefefe;
     padding: 20px;
@@ -199,37 +210,49 @@ td.wrapText {
 	border-radius: 8px;
 }
 
-.header {
-	display: flex;	
-	background-color: pink;
+#header {
+	display: flex;
+	font-size: 24px;
+	font-weight: 600;
+	/* background-colorgb(2, 2, 2)ink; */
 	justify-content: space-between;
 	align-items: center;
-}
-
-.close {
-	background-color: red;
-	font-size: 25px;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.close {
-	opacity: 0.3;
 }
 
 .close:hover {
 	opacity: 1;
 }
 
-input[type=text] {
+input[type=text],
+input[type=number] {
 	width: 100%;
 	padding: 12px 12px;
 	font-size: 18px;
 	margin: 8px 0;
+	border: 2px solid rgb(232, 232, 232);
+	border-radius: 5px;
 	box-sizing: border-box;
+}
+
+label.checkbox-label input[type=checkbox]{
+	position: relative;
+	vertical-align: middle;
+	bottom: 1px;
+}
+
+#actions {
+	display: flex;
+	gap: 10px;
+}
+
+#cancel {
+	color: black;
+	background-color: rgba(199, 199, 199, 0.509);
+	flex: 1;
+}
+
+#submit {
+	color: white;
+	background-color: rgb(40 167 69);
+	flex: 1;
 }

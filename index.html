@@ -65,19 +65,24 @@
         </div>
     </div>
 
-    <div class="modal">
+    <div id="modal">
         <!-- Modal content -->
-        <div class="modal-content">
-            <div class="header">
-                <h3>Add a book..</h3>
-                <span class="close">&times;</span>
-            </div>
+        <div id="modal-content">
+            <div id="header">Add a book..</div>
             <form>
                 <label for="bname">Book Name</label>
                 <input type="text" id="bname" name="bname">
                 <label for="pages">Pages</label>
-                <input type="text" id="pages" name="pages">
+                <input type="number" id="pages" name="pages">
+                
+                <label class="checkbox-label"><input type="checkbox" value="115"> I've read this book</label>
+                <!-- <input type="checkbox" id="haveread" name="haveread" value="Bike">
+                <label for="haveread" class="haveread">I've read this book</label><br> -->
             </form>
+            <div id="actions">
+                <button id="cancel">Cancel</button>
+                <button id="submit">Submit</button>
+            </div>
         </div>
     </div>
 </body>
