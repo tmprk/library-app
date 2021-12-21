@@ -145,7 +145,12 @@ tr {
 
 tr:not(thead tr) {
 	box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.05);
-	border-radius: 5px;
+	border-radius: 10px;
+}
+
+tr.row-no-header {
+	box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.05);
+	border-radius: 10px;
 }
 
 tr:nth-child(even) {
@@ -167,6 +172,7 @@ tr:nth-child(even) {
 
 td img {
 	border-radius: 5px;
+	width: 80px; /* change this */
 }
 
 td.fitwidth {

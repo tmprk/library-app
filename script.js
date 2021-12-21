@@ -17,6 +17,39 @@ const didRead = document.getElementById('read')
 const errorMsg = document.getElementById('error');
 const submitButton = document.getElementById('submit');
 
+const columnHeaders = ['cover', 'title', 'pages', 'read']
+
+var books = JSON.parse(localStorage.getItem("books") || "[]");
+
+if (books.length === 0) {
+    // books.push(new Book('http://books.google.com/books/content?id=bL3VlijouIwC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api', '1400079985', 'War and Peace', 1273, false))
+// books.push(new Book('http://books.google.com/books/content?id=mWHcDAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api', '9780486280615', 'The Adventures of Huckleberry Finn', 220, false))
+// books.push(new Book('http://books.google.com/books/content?id=sI_UG8lLey0C&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api', '0142437239', 'Don Quixote', 1072, false))
+    console.log('empty');
+} else {
+    console.log(books);
+    books.forEach(function callback(element, index) {
+        let tr = table.insertRow(-1);
+        tr.classList.add('row-no-header');
+        for (let i = 0; i < columnHeaders.length; i++) {
+            let td = tr.insertCell();
+            
+            if (i == 0) {
+                td.classList.add('fitwidth');
+            }
+
+            if (columnHeaders[i] == 'cover') {
+                var element1 = document.createElement("img");
+                element1.src = element.url;
+                td.appendChild(element1);
+            } else {
+                td.innerHTML = element[columnHeaders[i]];
+            }
+        }
+    })
+}
+// localStorage.setItem('books', JSON.stringify(books))
+
 function closeModal() {
     modal.style.display = "none";
     document.body.classList.remove('modal-open');
@@ -73,7 +106,7 @@ function fetchCover(event) {
     });
 }
 
-isbn.addEventListener('change', fetchCover);
+// isbn.addEventListener('change', fetchCover);
 bookName.addEventListener('input', validate);
 
 submitButton.onclick = function () {
@@ -82,9 +115,12 @@ submitButton.onclick = function () {
         console.log(bookName.value, pages.value, didRead.value);
 
         // insert row here
-        // let newRow = table.insertRow(-1);
+        const tr = table.insertRow(-1);
         // Insert a cell in the row at index 0
-        // let newCell = newRow.insertCell(0);
+        for (let i = 0; i < columnHeaders.length; i++) {
+            let td = tr.insertCell(0);
+            td.innerHTML = `Cell ${i}`;
+        }
         // Append a text node to the cell
         // let newText = document.createTextNode('New bottom row');
         // newCell.appendChild(newText);
