@@ -1,3 +1,5 @@
+import Book from './Book.js';
+
 const table = document.getElementById('book-list');
 const modal = document.getElementById('modal');
 
@@ -61,8 +63,10 @@ function fetchCover(event) {
         // This is the JSON from our response
         // console.log(data['items'].count)
         const bookData = data['items'][0]['volumeInfo']
-        bookName.textContent = bookData.title
-        
+        const thumbnail = bookData['imageLinks']['smallThumbnail']
+
+        bookName.value = bookData.title
+        cover.src = thumbnail
     }).catch(function (err) {
         // There was an error
         console.warn('Something went wrong.', err);
