@@ -7,6 +7,8 @@ const addBtn = document.getElementById("add");
 // Get the cancel that closes the modal
 const cancel = document.getElementById("cancel");
 
+const cover = document.getElementById('cover');
+const isbn = document.getElementById('isbn');
 const bookName = document.getElementById('bname');
 const pages = document.getElementById('pages');
 const didRead = document.getElementById('read')
@@ -46,6 +48,28 @@ function validate(e) {
     }
 }
 
+function fetchCover(event) {
+    const isbnToTry = event.target.value;
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbnToTry}`).then(function (response) {
+        // The API call was successful!
+        if (response.ok) {
+            return response.json();
+        } else {
+            return Promise.reject(response);
+        }
+    }).then(function (data) {
+        // This is the JSON from our response
+        // console.log(data['items'].count)
+        const bookData = data['items'][0]['volumeInfo']
+        bookName.textContent = bookData.title
+        
+    }).catch(function (err) {
+        // There was an error
+        console.warn('Something went wrong.', err);
+    });
+}
+
+isbn.addEventListener('change', fetchCover);
 bookName.addEventListener('input', validate);
 
 submitButton.onclick = function () {
