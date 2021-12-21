@@ -20,7 +20,7 @@
         </div>
         
         <div id="content">
-            <table class="book-list">
+            <table id="book-list">
                 <thead>
                     <tr>
                         <th>Cover</th>
@@ -65,20 +65,22 @@
         </div>
     </div>
 
-    <div id="modal">
+    <div id="modal" class="w3-animate-opacity">
         <!-- Modal content -->
         <div id="modal-content">
             <div id="header">Add a book..</div>
-            <form>
+            <form id="bookform">
+                <label for="isbn">ISBN</label>
+                <input type="text" id="isbn" name="isbn">
                 <label for="bname">Book Name</label>
                 <input type="text" id="bname" name="bname">
                 <label for="pages">Pages</label>
-                <input type="number" id="pages" name="pages">
-                
-                <label class="checkbox-label"><input type="checkbox" value="115"> I've read this book</label>
+                <input type="number" id="pages" name="pages" value="123">
+                <label class="checkbox-label"><input type="checkbox" id="read"> I've read this book</label>
                 <!-- <input type="checkbox" id="haveread" name="haveread" value="Bike">
                 <label for="haveread" class="haveread">I've read this book</label><br> -->
             </form>
+            <p id="error">Make sure fields are valid.</p>
             <div id="actions">
                 <button id="cancel">Cancel</button>
                 <button id="submit">Submit</button>
