@@ -22,9 +22,9 @@ var books = JSON.parse(localStorage.getItem("books") || "[]");
 
 function setBooks() {
     if (books.length === 0) {
-        books.push(new Book('http://books.google.com/books/content?id=bL3VlijouIwC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api', '1400079985', 'War and Peace', 1273, false))
-        books.push(new Book('http://books.google.com/books/content?id=mWHcDAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api', '9780486280615', 'The Adventures of Huckleberry Finn', 220, false))
-        books.push(new Book('http://books.google.com/books/content?id=sI_UG8lLey0C&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api', '0142437239', 'Don Quixote', 1072, false))
+        books.push(new Book('https://books.google.com/books/content?id=bL3VlijouIwC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api', '1400079985', 'War and Peace', 1273, false))
+        books.push(new Book('https://books.google.com/books/content?id=mWHcDAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api', '9780486280615', 'The Adventures of Huckleberry Finn', 220, false))
+        books.push(new Book('https://books.google.com/books/content?id=sI_UG8lLey0C&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api', '0142437239', 'Don Quixote', 1072, false))
         localStorage.setItem('books', JSON.stringify(books))
         console.log('no books in localStorage, is empty');
     } else {
