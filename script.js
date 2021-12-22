@@ -18,37 +18,58 @@ const errorMsg = document.getElementById('error');
 const submitButton = document.getElementById('submit');
 
 const columnHeaders = ['cover', 'title', 'pages', 'read']
-
 var books = JSON.parse(localStorage.getItem("books") || "[]");
 
 if (books.length === 0) {
     // books.push(new Book('http://books.google.com/books/content?id=bL3VlijouIwC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api', '1400079985', 'War and Peace', 1273, false))
-// books.push(new Book('http://books.google.com/books/content?id=mWHcDAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api', '9780486280615', 'The Adventures of Huckleberry Finn', 220, false))
-// books.push(new Book('http://books.google.com/books/content?id=sI_UG8lLey0C&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api', '0142437239', 'Don Quixote', 1072, false))
-    console.log('empty');
+    // books.push(new Book('http://books.google.com/books/content?id=mWHcDAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api', '9780486280615', 'The Adventures of Huckleberry Finn', 220, false))
+    // books.push(new Book('http://books.google.com/books/content?id=sI_UG8lLey0C&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api', '0142437239', 'Don Quixote', 1072, false))
+    // localStorage.setItem('books', JSON.stringify(books))
+    console.log('no books in localStorage, is empty');
 } else {
-    console.log(books);
+    console.log(`${books.length} book(s) present. not empty`);
     books.forEach(function callback(element, index) {
-        let tr = table.insertRow(-1);
-        tr.classList.add('row-no-header');
-        for (let i = 0; i < columnHeaders.length; i++) {
-            let td = tr.insertCell();
-            
-            if (i == 0) {
-                td.classList.add('fitwidth');
-            }
+        addRow(element)
+    })
+    console.log(books);
+}
 
-            if (columnHeaders[i] == 'cover') {
-                var element1 = document.createElement("img");
-                element1.src = element.url;
-                td.appendChild(element1);
+function addRow(element) {
+    let tr = table.insertRow(-1);
+    tr.classList.add('row-no-header');
+    for (let i = 0; i < columnHeaders.length; i++) {
+        let td = tr.insertCell();
+        if (i == 0 || i == 3) {
+            td.classList.add('fitwidth');
+        }
+        if (columnHeaders[i] == 'cover') {
+            var element1 = document.createElement("img");
+            element1.src = element.url;
+            // element1.src = 'http://placehold.jp/100x160.png'
+            td.appendChild(element1);
+        } else {
+            if (columnHeaders[i] == 'read') {
+                var toggleButton = document.createElement("button");
+                var haveRead = element[columnHeaders[i]];
+                toggleButton.textContent = (haveRead) ? 'read' : 'not read';
+                toggleButton.style.backgroundColor = (haveRead) ? 'rgba(48, 205, 85, 0.523)' : '#de4c5985'
+
+                toggleButton.onclick = function (e) {
+                    let rowIndex = e.target.closest('tr').rowIndex;
+                    books[rowIndex - 1].read = !books[rowIndex - 1].read;
+                    toggleButton.textContent = (books[rowIndex - 1].read) ? 'read' : 'not read';
+                    toggleButton.style.backgroundColor = (books[rowIndex - 1].read) ? 'rgba(48, 205, 85, 0.523)' : '#de4c5985'
+                    localStorage.setItem('books', JSON.stringify(books))
+                }
+
+                td.appendChild(toggleButton)
             } else {
                 td.innerHTML = element[columnHeaders[i]];
             }
         }
-    })
+    }
 }
-// localStorage.setItem('books', JSON.stringify(books))
+
 
 function closeModal() {
     modal.style.display = "none";
@@ -57,6 +78,7 @@ function closeModal() {
 
 // When the user clicks on the button, open the modal
 addBtn.onclick = () => {
+    isbn.value = bookName.value = '';
     modal.style.display = "flex";
     document.body.classList.add('modal-open');
 }
@@ -83,7 +105,7 @@ function validate(e) {
     }
 }
 
-function fetchCover(event) {
+function fetchData(event) {
     const isbnToTry = event.target.value;
     fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbnToTry}`).then(function (response) {
         // The API call was successful!
@@ -95,32 +117,33 @@ function fetchCover(event) {
     }).then(function (data) {
         // This is the JSON from our response
         // console.log(data['items'].count)
-        const bookData = data['items'][0]['volumeInfo']
-        const thumbnail = bookData['imageLinks']['smallThumbnail']
-
-        bookName.value = bookData.title
-        cover.src = thumbnail
+        // populate fields with fetched data
+        const bookData = data['items'][0]['volumeInfo'];
+        const smallThumbnailSrc = bookData['imageLinks']['smallThumbnail'];
+        
+        cover.src = smallThumbnailSrc;
+        bookName.value = bookData.title;
+        pages.value = bookData.pageCount;
     }).catch(function (err) {
         // There was an error
         console.warn('Something went wrong.', err);
     });
 }
 
-// isbn.addEventListener('change', fetchCover);
+isbn.addEventListener('change', fetchData);
 bookName.addEventListener('input', validate);
 
 submitButton.onclick = function () {
-    if (bname.value && pages.value) {
+    if (bookName.value && pages.value) {
         console.log('all validated')
         console.log(bookName.value, pages.value, didRead.value);
+        
+        const newBook = new Book(cover.src, isbn.value, bookName.value, pages.value, didRead.value)
+        books.push(newBook);
+        addRow(newBook);
 
-        // insert row here
-        const tr = table.insertRow(-1);
-        // Insert a cell in the row at index 0
-        for (let i = 0; i < columnHeaders.length; i++) {
-            let td = tr.insertCell(0);
-            td.innerHTML = `Cell ${i}`;
-        }
+        localStorage.setItem('books', JSON.stringify(books))
+
         // Append a text node to the cell
         // let newText = document.createTextNode('New bottom row');
         // newCell.appendChild(newText);

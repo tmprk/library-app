@@ -144,18 +144,19 @@ tr {
 }
 
 tr:not(thead tr) {
-	box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.05);
+	box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
 	border-radius: 10px;
 }
 
 tr.row-no-header {
-	box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.05);
+	box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
 	border-radius: 10px;
 }
 
-tr:nth-child(even) {
+/* for some reason, setting the background color prevents it from having a radius */
+/* tr:nth-of-type(even) {
 	background-color: #f2f2f2;
-}
+} */
 
 #book-list td,
 #book-list th {
@@ -277,4 +278,14 @@ label.checkbox-label input[type=checkbox]{
 	background-color: rgb(40 167 69);
 	font-size: 18px;
 	flex: 1;
+}
+
+#haveread {
+	background-color: rgba(48, 205, 85, 0.523);
+	color: white;
+}
+
+#notread {
+	background-color: #de4c5985;
+	color: white;
 }
