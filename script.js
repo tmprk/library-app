@@ -1,5 +1,6 @@
 // import Book from './Book.js';
 
+const container = document.getElementById('container');
 const table = document.getElementById('book-list');
 const modal = document.getElementById('modal');
 
@@ -86,6 +87,7 @@ function closeModal() {
 // When the user clicks on the button, open the modal
 addBtn.onclick = () => {
     isbn.value = bookName.value = '';
+    cover.src = './assets/placeholder.png'
     modal.style.display = "flex";
     document.body.classList.add('modal-open');
 }
@@ -158,9 +160,9 @@ submitButton.onclick = function () {
         closeModal();
 
         window.scrollBy({
-            top: table.offsetHeight, // Scroll the the end of the tabel's height
-            behavior: 'smooth'
-        });
+            top: container.offsetHeight,
+            behavior: "smooth"
+        })
     } else {
         console.log('not validated')
     }
