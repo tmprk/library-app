@@ -1,4 +1,4 @@
-import Book from './Book.js';
+// import Book from './Book.js';
 
 const table = document.getElementById('book-list');
 const modal = document.getElementById('modal');

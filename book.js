@@ -1,4 +1,4 @@
-export default class Book {
+class Book {
     constructor(url, isbn, title, pages, read=false) {
         this.url = url
         this.isbn = isbn
