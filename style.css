@@ -181,6 +181,11 @@ td.fitwidth {
 	white-space: nowrap;
 }
 
+td.titleCell {
+	font-size: 22px;
+	font-weight: 500;
+}
+
 td.wrapText {
 	width: 100px;
 	word-break: break-all;

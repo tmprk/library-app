@@ -20,18 +20,20 @@ const submitButton = document.getElementById('submit');
 const columnHeaders = ['cover', 'title', 'pages', 'read']
 var books = JSON.parse(localStorage.getItem("books") || "[]");
 
-if (books.length === 0) {
-    // books.push(new Book('http://books.google.com/books/content?id=bL3VlijouIwC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api', '1400079985', 'War and Peace', 1273, false))
-    // books.push(new Book('http://books.google.com/books/content?id=mWHcDAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api', '9780486280615', 'The Adventures of Huckleberry Finn', 220, false))
-    // books.push(new Book('http://books.google.com/books/content?id=sI_UG8lLey0C&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api', '0142437239', 'Don Quixote', 1072, false))
-    // localStorage.setItem('books', JSON.stringify(books))
-    console.log('no books in localStorage, is empty');
-} else {
-    console.log(`${books.length} book(s) present. not empty`);
+function setBooks() {
+    if (books.length === 0) {
+        books.push(new Book('http://books.google.com/books/content?id=bL3VlijouIwC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api', '1400079985', 'War and Peace', 1273, false))
+        books.push(new Book('http://books.google.com/books/content?id=mWHcDAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api', '9780486280615', 'The Adventures of Huckleberry Finn', 220, false))
+        books.push(new Book('http://books.google.com/books/content?id=sI_UG8lLey0C&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api', '0142437239', 'Don Quixote', 1072, false))
+        localStorage.setItem('books', JSON.stringify(books))
+        console.log('no books in localStorage, is empty');
+    } else {
+        console.log(`${books.length} book(s) present. not empty`);
+        console.log(books);
+    }
     books.forEach(function callback(element, index) {
-        addRow(element)
+        addRow(element);
     })
-    console.log(books);
 }
 
 function addRow(element) {
@@ -42,6 +44,11 @@ function addRow(element) {
         if (i == 0 || i == 3) {
             td.classList.add('fitwidth');
         }
+
+        if (i == 1) {
+            td.classList.add('titleCell');
+        }
+
         if (columnHeaders[i] == 'cover') {
             var element1 = document.createElement("img");
             element1.src = element.url;
@@ -136,19 +143,26 @@ bookName.addEventListener('input', validate);
 submitButton.onclick = function () {
     if (bookName.value && pages.value) {
         console.log('all validated')
-        console.log(bookName.value, pages.value, didRead.value);
+        console.log(cover.src, isbn.value, bookName.value, pages.value, didRead.value);
         
-        const newBook = new Book(cover.src, isbn.value, bookName.value, pages.value, didRead.value)
+        const newBook = new Book(cover.src, isbn.value, bookName.value, Number(pages.value), didRead.value == 'on' ? true : false)
         books.push(newBook);
         addRow(newBook);
-
         localStorage.setItem('books', JSON.stringify(books))
 
+        console.log(books);
         // Append a text node to the cell
         // let newText = document.createTextNode('New bottom row');
         // newCell.appendChild(newText);
         closeModal();
+
+        window.scrollBy({
+            top: table.offsetHeight, // Scroll the the end of the tabele's height
+            behavior: 'smooth'
+        });
     } else {
         console.log('not validated')
     }
 };
+
+setBooks();
