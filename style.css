@@ -44,7 +44,7 @@ body.modal-open {
 	display: flex;
 	flex-direction: column;
 	/* background-color: red; */
-	height: 100vh;
+	height: auto;
 	width: 70vw;
 	padding: 40px;
 	/* gap: 30px; */

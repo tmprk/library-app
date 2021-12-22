@@ -145,7 +145,8 @@ submitButton.onclick = function () {
         console.log('all validated')
         console.log(cover.src, isbn.value, bookName.value, pages.value, didRead.value);
         
-        const newBook = new Book(cover.src, isbn.value, bookName.value, Number(pages.value), didRead.value == 'on' ? true : false)
+        // console.log(didRead.checked)
+        const newBook = new Book(cover.src, isbn.value, bookName.value, Number(pages.value), didRead.checked)
         books.push(newBook);
         addRow(newBook);
         localStorage.setItem('books', JSON.stringify(books))
@@ -157,7 +158,7 @@ submitButton.onclick = function () {
         closeModal();
 
         window.scrollBy({
-            top: table.offsetHeight, // Scroll the the end of the tabele's height
+            top: table.offsetHeight, // Scroll the the end of the tabel's height
             behavior: 'smooth'
         });
     } else {
