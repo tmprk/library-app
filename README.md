@@ -13,8 +13,9 @@ It allows you to add and keep track of books that you've read or are planning to
 * The data source consists of an array of `Book` objects, that will be converted using `stringify` when set and `JSON.parse` when retrieved.
 
 ## Screenshots
-
-![on desktop](images/desktop.png)
+List             |  Modal
+:-------------------------:|:-------------------------:
+![desktop](images/desktop.png)  |  ![modal](images/modal.png)
 
 ## Demo
 
