@@ -18,4 +18,6 @@ It allows you to add and keep track of books that you've read or are planning to
 
 ## Demo
 
+https://user-images.githubusercontent.com/49933688/147184118-265a9b8f-1569-43a8-8efd-4318cb846116.mov
+
 A live preview of the site can be found [here](https://tmprk.github.io/library-app/)
