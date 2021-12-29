@@ -1,4 +1,4 @@
-// import Book from './Book.js';
+import Book from './Book.js';
 
 const container = document.getElementById('container');
 const table = document.getElementById('book-list');
